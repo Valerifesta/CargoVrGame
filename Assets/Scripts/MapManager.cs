@@ -4,6 +4,7 @@ public class MapManager : MonoBehaviour
 {
     public GameObject MapScreenObject;
     public GameObject MapBoundsObj;
+    public GameObject Arrow;
     Texture2D MapTexture;
     Texture2D ClearedTexture;
 
