@@ -39,6 +39,10 @@ public class MapManager : MonoBehaviour
         
         ClearedTexture = new Texture2D(width, height);
         MapTexture = new Texture2D(width, height);
+
+
+       // InvokeRepeating("resetTexture", 0, 0.3f);
+        
     }
 
     // Update is called once per frame
@@ -50,18 +54,21 @@ public class MapManager : MonoBehaviour
         DotTest();
         */
 
+
+
         if (goal != null)
         {
             
         }
     }
 
-    public void AddDrawPending(Color32 color, int size)
+    
+    public void AddDrawPending(Color32 color, int size, Vector3 markerWorldPos)
     {
-        resetTexture();
+        
 
-        Vector2 dir2D = new Vector2(goal.transform.position.x - _boatScript.transform.position.x, goal.transform.position.z - _boatScript.transform.position.z).normalized;
-        float distance = Vector3.Distance(goal.transform.position, _boatScript.transform.position);
+        Vector2 dir2D = new Vector2(markerWorldPos.x - _boatScript.transform.position.x, markerWorldPos.z - _boatScript.transform.position.z).normalized;
+        float distance = Vector3.Distance(markerWorldPos, _boatScript.transform.position);
 
         int offsetScale = 20;
         Color32[] colors = new Color32[size * size];
@@ -79,18 +86,23 @@ public class MapManager : MonoBehaviour
         int xClamped = Mathf.Clamp(x, 0, width - size);
         int yClamped = Mathf.Clamp(y, 0, height - size);
         MapTexture.SetPixels32(xClamped, yClamped, size, size, colors);
-        MapTexture.Apply();
+        
 
-        DrawPending();
 
     }
 
+    public void LateUpdate()
+    {
+        DrawPending();
+        resetTexture();
+    }
     void DrawPending()
     {
         MapScreenObject.GetComponent<Renderer>().material.mainTexture = MapTexture;
+        MapTexture.Apply();
 
     }
-
+    
     Vector2 textureCenter()
     {
         return new Vector2(width / 2, height / 2);
@@ -99,7 +111,6 @@ public class MapManager : MonoBehaviour
     void resetTexture()
     {
         MapTexture.SetPixels32(defaultColor);
-        MapTexture.Apply();
     }
     void DotTest()
     {

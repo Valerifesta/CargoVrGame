@@ -12,7 +12,7 @@ public class Map_Goal : MapInterest
     }
     private void Update()
     {
-        mapMan.AddDrawPending(colorRepresent, colorMarkerSize);
+        mapMan.AddDrawPending(colorRepresent, colorMarkerSize, transform.position);
     }
 
 }
