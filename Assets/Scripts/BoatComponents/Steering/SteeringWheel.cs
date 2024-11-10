@@ -5,8 +5,10 @@ public class SteeringWheel : BoatComponent
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public float SteerValue;
-    protected float maxSteerAbsolute;
     protected string steeringWheelName;
+
+    public float steerStrength; //is only public bc of testing. Change to protected later.
+    public float maxSteerAbsolute; //^
 
     public override void Start()
     {
@@ -21,7 +23,7 @@ public class SteeringWheel : BoatComponent
         float x = Input.GetAxisRaw("Horizontal");
         if (x != 0.0f)
         {
-            Steer(x * Time.deltaTime); //the Time.deltaTime is only needed for debugging with keyboard.
+            Steer(x * steerStrength * Time.deltaTime); //the Time.deltaTime is only needed for debugging with keyboard.
                                        //Later on, the "x" value inputted into the steering wheel is gonna depend on how much the player rotates the physical wheel in a direction.
         }
     }
