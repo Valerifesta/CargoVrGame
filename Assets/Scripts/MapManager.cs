@@ -23,6 +23,8 @@ public class MapManager : MonoBehaviour
 
     public int offsetX;
     public int offsetY;
+
+    public int mapPixelScale; //this scale number is arbitrary but 20 kinda works lol. In a way i guess it kinda becomes the size/bounds of the map
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,8 +69,7 @@ public class MapManager : MonoBehaviour
         Vector2 dir2D = new Vector2(markerWorldPos.x - _boatScript.transform.position.x, markerWorldPos.z - _boatScript.transform.position.z).normalized;
         float distance = Vector3.Distance(markerWorldPos, _boatScript.transform.position);
 
-        //this scale number is arbitrary but 20 kinda works lol. In a way i guess it kinda becomes the size/bounds of the map
-        int offsetScale = 20;
+        
         Color32[] colors = new Color32[size * size];
         for (int i = 0; i < colors.Length; i++)
         {
@@ -76,8 +77,8 @@ public class MapManager : MonoBehaviour
         }
 
         //Defines offset of map interest relative to the boat/map center
-        offsetX = (int)(dir2D.x * distance * offsetScale);
-        offsetY = (int)(dir2D.y * distance * offsetScale);
+        offsetX = (int)(dir2D.x * distance * mapPixelScale);
+        offsetY = (int)(dir2D.y * distance * mapPixelScale);
 
         //Mashes it all together, the map interest position will coorespond to its world position relative to the boat/map center
         int x = (int)textureCenter().x - (size / 2) + offsetX;
