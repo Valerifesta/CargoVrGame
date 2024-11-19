@@ -9,7 +9,6 @@ public class SteeringWheel : BoatComponent
 
     public float steerStrength; //is only public bc of testing. Change to protected later.
     public float maxSteerAbsolute; //^
-
     public override void Start()
     {
         base.Start();
@@ -53,6 +52,15 @@ public class SteeringWheel : BoatComponent
         {
             SteerValue = nextSteerValue;
         }
+
+    }
+
+    public void OnWheelGrabBegin(Vector3 grabPos)
+    {
+
+    }
+    public void OnWheelRelease(Vector3 releasePos)
+    {
 
     }
 

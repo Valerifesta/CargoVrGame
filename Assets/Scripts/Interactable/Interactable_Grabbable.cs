@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class Motor_Test0 : Motor
+public class Interactable_Grabbable : Interactable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    protected Collider[] interactionColliders;
+
     public override void Start()
     {
         base.Start();
-        maxAbsVelocity = 1.0f; 
-        acceleration = 0.1f;
-        drag = 20.0f;
-        motorName = "Test Motor : Series 0";
     }
-
-   
-
     // Update is called once per frame
-    
+    void Update()
+    {
+        
+    }
 }

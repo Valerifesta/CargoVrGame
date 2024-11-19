@@ -15,4 +15,6 @@ public class Map_Vehicle : MapInterest
     {
         mapMan.AddDrawPending(colorRepresent, colorMarkerSize, transform.position);
     }
+
+
 }
