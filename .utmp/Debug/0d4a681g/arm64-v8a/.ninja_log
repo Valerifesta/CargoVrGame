@@ -1,0 +1,10 @@
+# ninja log v5
+29	9130	7549265784997997	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	ca590a3837eab604
+80	9235	7549265786242818	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	c3e2b713f1a2a76a
+20	9266	7549265786439630	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	d8b93d917f75c851
+61	9437	7549265787418111	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c10726732e4a1fec
+52	9502	7549265788609901	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	27876a21b3f0a2b7
+1	9548	7549265788898517	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	920ab7b2bcfc36d4
+42	9693	7549265790744050	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	687e07e4c6633d0e
+12	10015	7549265793618601	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	4e41c82f08994dc2
+10015	10594	7549265799658575	C:/Users/victor.welin/Documents/Github/CargoVrGame/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/0d4a681g/obj/arm64-v8a/libgame.so	234e4a2d1c55d5d6

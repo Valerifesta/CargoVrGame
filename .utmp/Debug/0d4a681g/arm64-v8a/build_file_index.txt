@@ -1,0 +1,2 @@
+C:\Users\victor.welin\Documents\Github\CargoVrGame\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\victor.welin\Documents\Github\CargoVrGame\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
