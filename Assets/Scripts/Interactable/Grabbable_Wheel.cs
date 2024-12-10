@@ -12,10 +12,7 @@ public class Grabbable_Wheel : Interactable_Grabbable
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
     void GetColliders()
     {

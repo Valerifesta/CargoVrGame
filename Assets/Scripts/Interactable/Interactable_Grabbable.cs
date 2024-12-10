@@ -14,4 +14,5 @@ public class Interactable_Grabbable : Interactable
     {
         
     }
+    //public virtual void OnGrab()
 }
