@@ -1,3 +1,4 @@
+using Unity.VRTemplate;
 using UnityEngine;
 
 public class SteeringWheel : BoatComponent
@@ -53,6 +54,13 @@ public class SteeringWheel : BoatComponent
             SteerValue = nextSteerValue;
         }
 
+        TryRotateWheelVisual();
+
+    }
+    public void TryRotateWheelVisual()
+    {
+        float t = Mathf.InverseLerp(-maxSteerAbsolute, maxSteerAbsolute, SteerValue);
+        CorrespondingGameObject.GetComponent<XRKnob>().value = t;
     }
 
     public void OnWheelGrabBegin(Vector3 grabPos)
