@@ -57,7 +57,7 @@ public class SteeringWheel : BoatComponent
         TryRotateWheelVisual();
 
     }
-    public void TryRotateWheelVisual()
+    public void TryRotateWheelVisual() //The gameobject which corresponds with the ingame wheel that is being used has to have a correctly assigned XRKnob component. 
     {
         float t = Mathf.InverseLerp(-maxSteerAbsolute, maxSteerAbsolute, SteerValue);
         CorrespondingGameObject.GetComponent<XRKnob>().value = t;
