@@ -13,11 +13,12 @@ public class WorldManager : MonoBehaviour
     //2. Only objects and events within a certian amount of chunk distance can happen. Exactly how many chunks is needed depends on the object/event itself.
     //   Objects outside of this distance will not be loaded. 
     //3. Dont make the map too big maen.
+    public GameObject WorldPivotObj; //Set in inspector
     public float ChunkSize; //
-    public int WorldSize; //How many more chunk "circuferances" exist around the base chunk.
+    public int WorldSize; // Amount of chunk rows.
     public GameObject[] Chunks;
 
-    private List<GameObject> previousSegmentChunks;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +34,7 @@ public class WorldManager : MonoBehaviour
     private void InstantiateChunks()
     {
         GameObject[] topChunks = new GameObject[WorldSize];
+        List<GameObject> verticalChunks = new List<GameObject>();
         for (int i = 0; i < WorldSize; i++)
         {
             GameObject newTopChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -40,13 +42,15 @@ public class WorldManager : MonoBehaviour
             newTopChunk.transform.localScale *= (ChunkSize / 5);
             if (i == 0)
             {
-                newTopChunk.transform.position = Vector3.zero;
+                newTopChunk.transform.position = Vector3.zero; //offset here in order 
             }
             else
             {
-                newTopChunk.transform.position = topChunks[i - 1].transform.position + Vector3.right * ChunkSize *2;
+                newTopChunk.transform.position = topChunks[i - 1].transform.position + Vector3.right * ChunkSize * 2;
             }
             topChunks[i] = newTopChunk;
+            newTopChunk.transform.parent = WorldPivotObj.transform;
+            newTopChunk.name = i + "_" + 0;
 
             for (int a = 0; a < WorldSize - 1; a++)
             {
@@ -54,8 +58,34 @@ public class WorldManager : MonoBehaviour
                 newVerticalChunk.transform.localScale *= (ChunkSize / 5);
                 //newVerticalChunk.GetComponent<MeshRenderer>().bounds.size.Set(ChunkSize, ChunkSize, ChunkSize);
                 newVerticalChunk.transform.position = topChunks[i].transform.position - (Vector3.forward * ChunkSize * (a+1) *2);
+               
+
+                newVerticalChunk.transform.parent = WorldPivotObj.transform;
+                newVerticalChunk.name = i + "_" + (a + 1);
+
+                verticalChunks.Add(newVerticalChunk);
+
             }
+
+            
         }
+        //reset all child objects y pos
+        Vector3 offset = verticalChunks[verticalChunks.Count - 1].transform.position - WorldPivotObj.transform.position;
+        WorldPivotObj.transform.position -= offset / 2;
+        
+        //puts all in array
+        List<GameObject> allChunks = new List<GameObject>(verticalChunks.Count + topChunks.Length);
+        allChunks.AddRange(topChunks);
+        allChunks.AddRange(verticalChunks);
+        Chunks = allChunks.ToArray();
+
+
+
+
+        
+        
+
+
         /*
         GameObject centerChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
         centerChunk.transform.localScale *= ChunkSize;
