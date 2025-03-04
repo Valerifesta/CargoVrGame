@@ -7,13 +7,14 @@ public class BoatBehaviour : MonoBehaviour
     public Motor EquippedMotor;
 
     private MapManager mapMan;
-
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public void Start()
     {
         mapMan = FindFirstObjectByType<MapManager>();
+        
     }
 
     // Update is called once per frame

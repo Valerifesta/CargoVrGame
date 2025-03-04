@@ -1,3 +1,5 @@
+using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -26,6 +28,9 @@ public class MapManager : MonoBehaviour
 
     public int mapPixelScale; //this scale number is arbitrary but 20 kinda works lol. In a way i guess it kinda becomes the size/bounds of the map
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] private GameObject ChunkWithPlayer;
+   
     void Start()
     {
         width = 256;
@@ -60,6 +65,20 @@ public class MapManager : MonoBehaviour
         if (goal != null)
         {
             
+        }
+        if (MapBoundsObj != null)
+        {
+            RaycastHit[] hit = Physics.RaycastAll(MapBoundsObj.transform.position, Vector3.down, 100);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer("Chunk"))
+                {
+                    ChunkWithPlayer = hit[i].collider.gameObject;
+                    break;
+                }
+                //allChunksInRay[i] = hit[i].collider.gameObject;
+            }
+
         }
     }
 

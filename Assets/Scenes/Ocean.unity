@@ -278,6 +278,7 @@ MonoBehaviour:
   offsetX: 0
   offsetY: 0
   mapPixelScale: 6
+  ChunkWithPlayer: {fileID: 0}
 --- !u!4 &36149035
 Transform:
   m_ObjectHideFlags: 0
@@ -830,7 +831,7 @@ Transform:
   m_GameObject: {fileID: 387144143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.42, z: 0}
+  m_LocalPosition: {x: 0, y: 10.2, z: 0}
   m_LocalScale: {x: 1.3064, y: 1.3064, z: 1.3064}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1310,8 +1311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WorldPivotObj: {fileID: 1841944620}
-  ChunkSize: 15
-  WorldSize: 4
+  ChunkSize: 30
+  WorldSize: 5
   Chunks: []
 --- !u!4 &418008544
 Transform:
@@ -2147,9 +2148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CorrespondingGameObject: {fileID: 266984185}
-  acceleration: 0
-  maxAbsVelocity: 0
-  drag: 0
+  acceleration: 10
+  maxAbsVelocity: 15
+  drag: 20
 --- !u!114 &958682365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2164,8 +2165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CorrespondingGameObject: {fileID: 919132149261722392}
   SteerValue: 0
-  steerStrength: 0
-  maxSteerAbsolute: 0
+  steerStrength: 20
+  maxSteerAbsolute: 20
 --- !u!1 &1036575922
 GameObject:
   m_ObjectHideFlags: 0

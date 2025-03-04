@@ -7,8 +7,10 @@ public class Steering_Test0 : SteeringWheel
     {
         base.Start();
         steeringWheelName = "Test wheel : Series 0";
+        /*
         maxSteerAbsolute = 10;
         steerStrength = 2.0f;
+        */
     }
 
     

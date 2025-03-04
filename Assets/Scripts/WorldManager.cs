@@ -4,6 +4,7 @@ using Oculus.VoiceSDK.UX;
 using OVR.OpenVR;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour
@@ -18,7 +19,14 @@ public class WorldManager : MonoBehaviour
     public int WorldSize; // Amount of chunk rows.
     public GameObject[] Chunks;
 
-    
+    [SerializeField] private GameObject[] _verticalChunks;
+    [SerializeField] private GameObject[] _topChunks;
+
+    public int topIndexInsert;
+    public int vertIndexInsert;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +36,10 @@ public class WorldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log(GetChunk(topIndexInsert, vertIndexInsert).name);
+        }
     }
 
     private void InstantiateChunks()
@@ -38,6 +49,7 @@ public class WorldManager : MonoBehaviour
         for (int i = 0; i < WorldSize; i++)
         {
             GameObject newTopChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            
 
             newTopChunk.transform.localScale *= (ChunkSize / 5);
             if (i == 0)
@@ -75,103 +87,40 @@ public class WorldManager : MonoBehaviour
         
         //puts all in array
         List<GameObject> allChunks = new List<GameObject>(verticalChunks.Count + topChunks.Length);
+        _topChunks = topChunks;
+        _verticalChunks = verticalChunks.ToArray();
+
         allChunks.AddRange(topChunks);
         allChunks.AddRange(verticalChunks);
+
+        foreach (GameObject chunk in allChunks)
+        {
+            chunk.layer = LayerMask.NameToLayer("Chunk");
+        }
+
         Chunks = allChunks.ToArray();
 
-
-
-
-        
-        
-
-
-        /*
-        GameObject centerChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        centerChunk.transform.localScale *= ChunkSize;
-
-        for (int i = 0; i < WorldSize; i++)
+    }
+    GameObject GetChunk(int topIndex, int verticalIndex)
+    {
+        GameObject chunk = new GameObject();
+        if (verticalIndex != 0)
         {
-            if (i == 0)
+            int allChunkIndex = new int();
+            if (topIndex == 0)
             {
-                GameObject upperCore = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                upperCore.transform.localScale *= ChunkSize;
-                upperCore.transform.position = centerChunk.transform.position + Vector3.forward * ChunkSize;
-
-                GameObject lowerCore = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                lowerCore.transform.localScale *= ChunkSize;
-                lowerCore.transform.position = centerChunk.transform.position -Vector3.forward * ChunkSize;
-
-                GameObject rightCore = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                rightCore.transform.localScale *= ChunkSize;
-                rightCore.transform.position = centerChunk.transform.position + Vector3.right * ChunkSize;
-
-                GameObject leftCore = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                leftCore.transform.localScale *= ChunkSize;
-                leftCore.transform.position = centerChunk.transform.position -Vector3.right * ChunkSize;
-
-                GameObject[] coreChunks = new GameObject[4] { upperCore, lowerCore, rightCore, leftCore };
-                previousSegmentChunks.AddRange(coreChunks);
-
+                allChunkIndex = ((4 * topIndex) - 1) + verticalIndex;
             }
             else
             {
-                List<GameObject> newSegmentChunks = new List<GameObject>();
-                foreach (GameObject chunk in previousSegmentChunks)
-                {
-                    Vector3 diff = centerChunk.transform.position - chunk.transform.position; //math might be wrong
-
-                    
-                    if (diff.x != 0 && diff.z != 0) //corner chunk)
-                    {
-
-                    }
-                    else
-                    {
-                        GameObject newChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                        newChunk.transform.localScale *= ChunkSize;
-                        newChunk.transform.position = chunk.transform.position + diff.normalized * ChunkSize;//math might be wrong
-
-                    }
-                }
-                
+                allChunkIndex = ((4 * topIndex) - topIndex) + verticalIndex; //for some reason it offsets back at 2-0. It goes to 1-4 instead of 2-1.
             }
+            chunk = _verticalChunks[allChunkIndex];
         }
-
-        
-
-        */
-
-        /*
-        GameObject[] chunksX = new GameObject[WorldSize];
-        GameObject[] chunksZ = new GameObject[(WorldSize ^ 2) - WorldSize];
-
-        for (int i = 0; i < WorldSize; i++)
+        else
         {
-            GameObject newChunkX = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            newChunkX.transform.localScale *= ChunkSize;
-
-            //set a base position for the first chunk X
-            if (i != 0)
-            {
-                newChunkX.transform.position = chunksX[i - 1].transform.position + (Vector3.right * ChunkSize);
-            }
-            chunksX[i] = newChunkX;
-
-            for (int a = 0; a < WorldSize; a++)
-            {
-                GameObject newChunkZ = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                newChunkZ.transform.localScale *= ChunkSize;
-
-                if (a != 0)
-                {
-                    newChunkZ.transform.position = chunksZ[a - 1].transform.position + (Vector3.forward * ChunkSize);
-                }
-                chunksZ[a] = newChunkZ;
-            }
-
-
-        }*/
-
+            chunk = _topChunks[topIndex];
+        }
+        return chunk;
     }
 }
