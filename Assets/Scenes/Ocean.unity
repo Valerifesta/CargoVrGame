@@ -1314,6 +1314,10 @@ MonoBehaviour:
   ChunkSize: 30
   WorldSize: 5
   Chunks: []
+  _verticalChunks: []
+  _topChunks: []
+  topIndexInsert: 0
+  vertIndexInsert: 2
 --- !u!4 &418008544
 Transform:
   m_ObjectHideFlags: 0
