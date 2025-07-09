@@ -5,6 +5,8 @@ public class Motor : BoatComponent
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float acceleration;
+    protected float accelerationModif = 1.0f;
+
     protected float velocity;
     public float maxAbsVelocity;
     public float drag;
@@ -23,10 +25,10 @@ public class Motor : BoatComponent
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ToggleMotor();
-        }
+        TryGetBoatCompInput(this);
+
+
+
 
         if (isActive)
         {
@@ -46,11 +48,23 @@ public class Motor : BoatComponent
 
     }
 
+    public override void TryGetBoatCompInput(BoatComponent comp)
+    {
+        base.TryGetBoatCompInput(comp);
+        if (tempInputControllers)
+        {
+            if (Input.GetKeyDown(KeyCode.Space)) //temp motor inputs
+            {
+                BoatScript.MotorActive = !BoatScript.MotorActive;
+            }
+        }
+
+    }
     public virtual void Accelerate()
     {
         if (velocity < maxAbsVelocity && velocity > -maxAbsVelocity)
         {
-            velocity += acceleration * Time.fixedDeltaTime;
+            velocity += acceleration * Time.fixedDeltaTime * accelerationModif;
         }
         else
         {
@@ -76,11 +90,19 @@ public class Motor : BoatComponent
         BoatScript.Drive(velocity);
     }
 
-    public virtual void ToggleMotor()
+    public virtual void ToggleMotor(bool newState)
     {
-        isActive = !isActive;
+        isActive = newState;
 
         t = 0.0f;
         anchorVelocity = 0.0f;
+    }
+
+    public override void SyncSettings()
+    {
+        base.SyncSettings();
+        ToggleMotor(BoatScript.MotorActive);
+        //Note that currently controlling doesent really need to be used for the motor component, since its toggleable.
+        
     }
 }

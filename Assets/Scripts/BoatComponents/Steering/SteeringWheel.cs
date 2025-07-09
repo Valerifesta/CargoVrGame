@@ -20,12 +20,30 @@ public class SteeringWheel : BoatComponent
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        if (x != 0.0f)
+        if (currentlyControlled)
         {
-            Steer(x * steerStrength * Time.deltaTime); //the Time.deltaTime is only needed for debugging with keyboard.
-                                       //Later on, the "x" value inputted into the steering wheel is gonna depend on how much the player rotates the physical wheel in a direction.
+            TryGetBoatCompInput(this);
         }
+        
+    }
+
+    public override void TryGetBoatCompInput(BoatComponent comp)
+    {
+        base.TryGetBoatCompInput(this);
+        if (tempInputControllers)
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            if (x != 0.0f)
+            {
+                Steer(x * steerStrength * Time.deltaTime); //the Time.deltaTime is only needed for debugging with keyboard.
+                                                           //Later on, the "x" value inputted into the steering wheel is gonna depend on how much the player rotates the physical wheel in a direction.
+            }
+        }
+        else
+        {
+            Debug.Log("trying to get other steering input");
+        }
+        
     }
 
     public void Steer(float xMagn)
@@ -70,6 +88,11 @@ public class SteeringWheel : BoatComponent
     public void OnWheelRelease(Vector3 releasePos)
     {
 
+    }
+    public override void SyncSettings()
+    {
+        base.SyncSettings();
+        currentlyControlled = BoatScript.IsSteering;
     }
 
 }

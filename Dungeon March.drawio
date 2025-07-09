@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.0.16">
+  <diagram name="Sida-1" id="nSDKArnzRmzORTeZdMIB">
+    <mxGraphModel dx="1134" dy="589" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Dungeon March&lt;/h1&gt;&lt;p&gt;Dungeon March is a game about (mainly) walking through a dungeon&#39;s many, many floors, with the simple goal of reaching the bottom and collecting the dungeon&#39;s prized core.&lt;/p&gt;&lt;p&gt;However.. You do not have any legs. Rather, you can&#39;t afford any legs and instead opt to build your own on the way down, sort of.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;//Cursed to walk forever?&lt;/p&gt;&lt;p&gt;MARCH YOUR WAY DOWN&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;BUILD THE LEGS (?)&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;AVOID THE RATS&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;GET PAID&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;? ? ?&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="310" height="441" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-4" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Upper Floors&lt;/h1&gt;&lt;div&gt;Mossy bricks and slabs makes up long corridors and even tight crawl-spaces.&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Enemies:&lt;/b&gt;&lt;br&gt;&lt;ul&gt;&lt;li&gt;Rat hoards&lt;/li&gt;&lt;li&gt;Slimes&lt;/li&gt;&lt;li&gt;Laser-shooting plants&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;b&gt;Traps:&lt;/b&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;Water Traps&lt;/li&gt;&lt;li&gt;Axe traps&lt;/li&gt;&lt;li&gt;Pillars&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;b&gt;Bosses:&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;¤ &amp;lt;- means the effect of the boss drop&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Slime amalgam&lt;br&gt;¤ Negates fall-damage&lt;br&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;¤&lt;/li&gt;&lt;li&gt;Stone Golem (with plant on top)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="10" width="200" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-5" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Gameplay mechanics&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;Fall Damage:&lt;br&gt;Just don&#39;t fall man. You&#39;ll ruin your work&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="500" width="310" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-6" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Concepts&lt;/h1&gt;&lt;p&gt;Enemies&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bosses&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Each boss drops a core of its correspondant&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Traps&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="500" width="260" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-9" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Middle Floor&lt;/h1&gt;&lt;p&gt;Mineshaft-like&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Rat hoards&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Rat god&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="580" y="10" width="180" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-10" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Lower Floor / The pit&lt;/h1&gt;&lt;p&gt;Spiral buildings around a large hanging dripstone. Cold enviorment. Lots of gears and old tech.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="770" y="10" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="xa-ZQLLf39OSBHAl9BPL-14" target="xa-ZQLLf39OSBHAl9BPL-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-14" value="THE LEGS" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-15" value="Slots" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="160" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-16" value="CORE" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="xa-ZQLLf39OSBHAl9BPL-15">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-17" value="Item 2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="xa-ZQLLf39OSBHAl9BPL-15">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xa-ZQLLf39OSBHAl9BPL-18" value="Item 3" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="xa-ZQLLf39OSBHAl9BPL-15">
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
