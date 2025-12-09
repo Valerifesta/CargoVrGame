@@ -3,6 +3,7 @@ using Oculus.Interaction.Samples;
 using Oculus.VoiceSDK.UX;
 using OVR.OpenVR;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class WorldManager : MonoBehaviour
     public float ChunkSize; //
     public int WorldSize; // Amount of chunk rows.
     public GameObject[] Chunks;
+    public Vector2[][] ChunkCorners = new Vector2[4][]; //A list in the same order as each chunk. 
 
     [SerializeField] private GameObject[] _verticalChunks;
     [SerializeField] private GameObject[] _topChunks;
@@ -30,7 +32,11 @@ public class WorldManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InstantiateChunks();
+        GenerateChunks();
+        /*
+        //temp
+        BoatBehaviour boat = FindFirstObjectByType<BoatBehaviour>();
+        boat.SetStartChunk(boat.startTopIndex, boat.startVerticalIndex);*/ //Moved down at the end of "GenerateChunks()"
     }
 
     // Update is called once per frame
@@ -42,7 +48,7 @@ public class WorldManager : MonoBehaviour
         }
     }
 
-    private void InstantiateChunks()
+    private void GenerateChunks() //Refers to the primtiive visuals, lists the chunks in order. Visualizes corners. 
     {
         GameObject[] topChunks = new GameObject[WorldSize];
         List<GameObject> verticalChunks = new List<GameObject>();
@@ -64,12 +70,14 @@ public class WorldManager : MonoBehaviour
             newTopChunk.transform.parent = WorldPivotObj.transform;
             newTopChunk.name = i + "_" + 0;
 
+
             for (int a = 0; a < WorldSize - 1; a++)
             {
                 GameObject newVerticalChunk = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 newVerticalChunk.transform.localScale *= (ChunkSize / 5);
-                //newVerticalChunk.GetComponent<MeshRenderer>().bounds.size.Set(ChunkSize, ChunkSize, ChunkSize);
-                newVerticalChunk.transform.position = topChunks[i].transform.position - (Vector3.forward * ChunkSize * (a+1) *2);
+                newVerticalChunk.transform.position = topChunks[i].transform.position - (Vector3.forward * ChunkSize * (a + 1) * 2);
+               
+                ///VisualizeCorners(newVerticalChunk.transform.position.x, newVerticalChunk.transform.position.z);
                
 
                 newVerticalChunk.transform.parent = WorldPivotObj.transform;
@@ -93,15 +101,24 @@ public class WorldManager : MonoBehaviour
         allChunks.AddRange(topChunks);
         allChunks.AddRange(verticalChunks);
 
-        foreach (GameObject chunk in allChunks)
+        ChunkCorners = new Vector2[allChunks.Count][]; //Makes space in list. Each chunk will have 4 corners connected to it.
+
+        for (int i = 0; i < allChunks.Count; i++)
         {
+            GameObject chunk = allChunks[i];
             chunk.layer = LayerMask.NameToLayer("Chunk");
+            GenerateChunkCorners(chunk.transform.position.x, chunk.transform.position.z, i);
         }
 
         Chunks = allChunks.ToArray();
 
+        //
+        BoatBehaviour boat = FindFirstObjectByType<BoatBehaviour>();
+        boat.SetStartChunk(boat.startTopIndex, boat.startVerticalIndex);
+        //
+
     }
-    GameObject GetChunk(int topIndex, int verticalIndex)
+    public GameObject GetChunk(int topIndex, int verticalIndex) //2025-12-08; When given a vertical index above what each row has, it shifts up to the next row-???? why??? why do this??
     {
         GameObject chunk = new GameObject();
         if (verticalIndex != 0)
@@ -122,5 +139,28 @@ public class WorldManager : MonoBehaviour
             chunk = _topChunks[topIndex];
         }
         return chunk;
+    }
+
+    void GenerateChunkCorners(float theoryZ, float theoryX, int indexInAllChunks)
+    {
+        float dist = ChunkSize;
+        Vector2 A = new Vector3(theoryZ - dist, -theoryX - dist);
+        Vector2 B = new Vector3(theoryZ + dist, -theoryX - dist);
+        Vector2 C = new Vector3(theoryZ - dist, -theoryX + dist);
+        Vector2 D = new Vector3(theoryZ + dist, -theoryX + dist);
+
+        Vector2[] corners = new Vector2[] { A, B, C, D };
+        print(A + "," + B + "," + C + "," + D);
+        ChunkCorners[indexInAllChunks] = corners;
+
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        foreach (Vector2 corner in corners) //Does the visual part)
+        {
+            GameObject newCorner = Instantiate(sphere);
+            newCorner.transform.parent = WorldPivotObj.transform;
+            newCorner.transform.position = new Vector3(corner.y, newCorner.transform.position.y, corner.x);
+            Destroy(sphere);
+        }
+
     }
 }

@@ -1902,9 +1902,17 @@ MonoBehaviour:
   SeatedByDefault: 0
   MotorOnByDefault: 0
   IsSeated: 0
+  MotorActive: 0
+  IsSteering: 0
   EquippedSteering: {fileID: 0}
   EquippedMotor: {fileID: 0}
   EquippedSeat: {fileID: 0}
+  FlooredPos: {x: 0, y: 0}
+  CurrentChunkName: 
+  CurrentChunkTopIndex: 0
+  CurrentChunkVerticalIndex: 0
+  startTopIndex: 2
+  startVerticalIndex: 5
 --- !u!1 &668600832
 GameObject:
   m_ObjectHideFlags: 0
@@ -7900,9 +7908,17 @@ MonoBehaviour:
   SeatedByDefault: 0
   MotorOnByDefault: 0
   IsSeated: 0
+  MotorActive: 0
+  IsSteering: 0
   EquippedSteering: {fileID: 0}
   EquippedMotor: {fileID: 0}
   EquippedSeat: {fileID: 0}
+  FlooredPos: {x: 0, y: 0}
+  CurrentChunkName: 
+  CurrentChunkTopIndex: 0
+  CurrentChunkVerticalIndex: 0
+  startTopIndex: 0
+  startVerticalIndex: 0
 --- !u!65 &1268902681
 BoxCollider:
   m_ObjectHideFlags: 0
