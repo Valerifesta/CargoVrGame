@@ -1912,7 +1912,7 @@ MonoBehaviour:
   CurrentChunkTopIndex: 0
   CurrentChunkVerticalIndex: 0
   startTopIndex: 2
-  startVerticalIndex: 5
+  startVerticalIndex: 1
 --- !u!1 &668600832
 GameObject:
   m_ObjectHideFlags: 0

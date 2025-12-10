@@ -75,7 +75,13 @@ public class BoatBehaviour : MonoBehaviour
             Vector2 localCornerD = chunkCorners[3];
             if (localCornerA.x < FlooredPos.x && FlooredPos.x <localCornerD.x && localCornerA.y < FlooredPos.y && FlooredPos.y < localCornerD.y)
             {
+
                 print("Boat has started on chunk: " + worldMan.Chunks[i].name);
+                CurrentChunkName = worldMan.Chunks[i].name;
+                Vector2 currentChunkIndexes = worldMan.GetChunkIndexes(i);
+                CurrentChunkTopIndex = (int)currentChunkIndexes.x;
+                CurrentChunkVerticalIndex = (int)currentChunkIndexes.y;
+
             }
         }
     }

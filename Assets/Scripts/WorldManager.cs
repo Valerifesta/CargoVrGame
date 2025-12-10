@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
 using Unity.Collections;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour
@@ -44,7 +45,12 @@ public class WorldManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log(GetChunk(topIndexInsert, vertIndexInsert).name);
+            GameObject insertCorrespondingChunk = GetChunk(topIndexInsert, vertIndexInsert);
+            if (insertCorrespondingChunk != null)
+            {
+                Debug.Log("Test DEBUG: " + insertCorrespondingChunk.name);
+            }
+            
         }
     }
 
@@ -121,33 +127,92 @@ public class WorldManager : MonoBehaviour
     public GameObject GetChunk(int topIndex, int verticalIndex) //2025-12-08; When given a vertical index above what each row has, it shifts up to the next row-???? why??? why do this??
     {
         GameObject chunk = new GameObject();
-        if (verticalIndex != 0)
+        int allChunkIndex = new int();
+
+        if (verticalIndex >= WorldSize || topIndex >= WorldSize) //If the inputted index is outside of the range of the corresponding listed chunk type. As the map is expanded uniformally and is dependant on the "WorldSize" to decide the maximum number of rows, comparing the index to WorldSize practically checks if its outside of the established size limit.
         {
-            int allChunkIndex = new int();
-            if (topIndex == 0)
-            {
-                allChunkIndex = ((4 * topIndex) - 1) + verticalIndex;
-            }
-            else
-            {
-                allChunkIndex = ((4 * topIndex) - topIndex) + verticalIndex; //for some reason it offsets back at 2-0. It goes to 1-4 instead of 2-1.
-            }
-            chunk = _verticalChunks[allChunkIndex];
+            print("ERROR! COULD NOT GET VALID CHUNK. INDEX IS OUTSIDE OF SIZE LIMIT. TOP INDEX: " + topIndex + ", VERTICAL INDEX: " + verticalIndex);
         }
         else
         {
-            chunk = _topChunks[topIndex];
+            print("CHUNK INDEX IS INSIDE OF WORLD SIZE. ATTEMPTING TO FIND CORRESPONDING CHUNK. TOP INDEX: " + topIndex + ", VERTICAL INDEX: " + verticalIndex);
+            if (verticalIndex == 0)
+            {
+                allChunkIndex = topIndex;
+            }
+            else
+            {
+                allChunkIndex = _topChunks.Length - 1 + ((_topChunks.Length - 1) * topIndex) + verticalIndex;
+            }
+            if (allChunkIndex < Chunks.Length && Chunks[allChunkIndex] != null)
+            {
+                chunk = Chunks[allChunkIndex];
+                print("RETRIEVED CHUNK: " + chunk + " ; CORRESPONDING TO INPUTS: TOP INDEX: " + topIndex + ", VERTICAL INDEX: " + verticalIndex);
+                return chunk;
+            }
+            else
+            {
+                print("ERROR! COULD NOT GET VALID CHUNK. INDEX: " + allChunkIndex);
+                return null;
+            }
         }
-        return chunk;
+
+
+        /*
+     if (verticalIndex != 0)
+     {
+         int allChunkIndex = new int();
+         if (topIndex == 0)
+         {
+             allChunkIndex = ((4 * topIndex) - 1) + verticalIndex;
+         }
+         else
+         {
+             allChunkIndex = ((4 * topIndex) - topIndex) + verticalIndex; //for some reason it offsets back at 2-0. It goes to 1-4 instead of 2-1.
+         }
+         chunk = _verticalChunks[allChunkIndex];
+     }
+     else
+     {
+         chunk = _topChunks[topIndex];
+     }*/
+        return null;
+    }
+    public Vector2 GetChunkIndexes(int indexInAllChunks)
+    {
+        int retrievedTopIndex = new int();
+        int retrievedVerticalIndex = new int();
+
+        if (indexInAllChunks > WorldSize)
+        {
+            for (int i = 0; (indexInAllChunks - retrievedTopIndex * (WorldSize - 1)) >= WorldSize; i++)
+            {
+                retrievedTopIndex = i;
+            }
+            retrievedVerticalIndex = indexInAllChunks - retrievedTopIndex * (WorldSize - 1);
+            if (retrievedTopIndex != 0)
+            {
+                retrievedTopIndex -= 1; //Makes it into an index instead of a number of steps.
+
+            }
+       
+        }
+        else
+        {
+            retrievedTopIndex = indexInAllChunks;
+            retrievedVerticalIndex = 0;
+        }    
+
+        return new Vector2(retrievedTopIndex, retrievedVerticalIndex);
     }
 
     void GenerateChunkCorners(float theoryZ, float theoryX, int indexInAllChunks)
     {
         float dist = ChunkSize;
-        Vector2 A = new Vector3(theoryZ - dist, -theoryX - dist);
-        Vector2 B = new Vector3(theoryZ + dist, -theoryX - dist);
-        Vector2 C = new Vector3(theoryZ - dist, -theoryX + dist);
-        Vector2 D = new Vector3(theoryZ + dist, -theoryX + dist);
+        Vector2 A = new Vector3(theoryZ - dist, theoryX - dist);
+        Vector2 B = new Vector3(theoryZ + dist, theoryX - dist);
+        Vector2 C = new Vector3(theoryZ - dist, theoryX + dist);
+        Vector2 D = new Vector3(theoryZ + dist, theoryX + dist);
 
         Vector2[] corners = new Vector2[] { A, B, C, D };
         print(A + "," + B + "," + C + "," + D);
