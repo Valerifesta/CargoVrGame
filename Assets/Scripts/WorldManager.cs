@@ -138,6 +138,8 @@ public class WorldManager : MonoBehaviour
         else
         {
             print("CHUNK INDEX IS INSIDE OF WORLD SIZE. ATTEMPTING TO FIND CORRESPONDING CHUNK. TOP INDEX: " + topIndex + ", VERTICAL INDEX: " + verticalIndex);
+            allChunkIndex = listIndexesToAllChunkIndex(topIndex, verticalIndex);
+            /*
             if (verticalIndex == 0)
             {
                 allChunkIndex = topIndex;
@@ -146,6 +148,7 @@ public class WorldManager : MonoBehaviour
             {
                 allChunkIndex = _topChunks.Length - 1 + ((_topChunks.Length - 1) * topIndex) + verticalIndex;
             }
+            */
             if (allChunkIndex < Chunks.Length && Chunks[allChunkIndex] != null)
             {
                 chunk = Chunks[allChunkIndex];
@@ -181,8 +184,9 @@ public class WorldManager : MonoBehaviour
      }*/
         return null;
     }
-    public void GetNeighborChunks(int currentTopIndex, int currentVertIndex) //Based on current chunk, rooted on start chunk
+    public Vector2[] GetNeighborChunks(int currentTopIndex, int currentVertIndex) //Based on current chunk, rooted on start chunk
     {
+        List<Vector2> verifiedNeighborChunksIndexes = new List<Vector2>();
         Vector2 indexes_U = new Vector2(currentTopIndex + 1, currentVertIndex); //Up
         Vector2 indexes_D = new Vector2(currentTopIndex - 1, currentVertIndex); //Down
         Vector2 indexes_L = new Vector2(currentTopIndex, currentVertIndex - 1); //Left
@@ -199,19 +203,34 @@ public class WorldManager : MonoBehaviour
             else
             {
                 print("RETRIEVED NEIGHBOR CHUNK. INPUTTED INDEX: " + chunk);
-                GameObject retrievedNearbyChunk = GetChunk((int)chunk.x, (int)chunk.y);
+                GameObject retrievedNeighborChunk = GetChunk((int)chunk.x, (int)chunk.y);
+                verifiedNeighborChunksIndexes.Add(chunk);
             }
         }
+
+        return verifiedNeighborChunksIndexes.ToArray();
+
+
         //Check if each is inside of limit. If true, add to neighbor chunks.
 
 
 
 
     }
-    public int listIndexesToAllChunkIndex(int TopIndex, int VertIndex)
+    public int listIndexesToAllChunkIndex(int TopIndex, int VertIndex) //Indexes HAS to be verified already.
     {
         int allChunkIndex = new int();
-        return 0;
+
+        if (VertIndex == 0)
+        {
+            allChunkIndex = TopIndex;
+        }
+        else
+        {
+            allChunkIndex = _topChunks.Length - 1 + ((_topChunks.Length - 1) * TopIndex) + VertIndex;
+        }
+
+        return allChunkIndex;
     }
     public Vector2 GetChunkIndexes(int indexInAllChunks)
     {

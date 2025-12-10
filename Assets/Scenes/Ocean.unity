@@ -1911,8 +1911,9 @@ MonoBehaviour:
   CurrentChunkName: 
   CurrentChunkTopIndex: 0
   CurrentChunkVerticalIndex: 0
-  startTopIndex: 0
-  startVerticalIndex: 0
+  NeighboringChunks: []
+  startTopIndex: 3
+  startVerticalIndex: 2
 --- !u!1 &668600832
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,6 +7918,7 @@ MonoBehaviour:
   CurrentChunkName: 
   CurrentChunkTopIndex: 0
   CurrentChunkVerticalIndex: 0
+  NeighboringChunks: []
   startTopIndex: 0
   startVerticalIndex: 0
 --- !u!65 &1268902681

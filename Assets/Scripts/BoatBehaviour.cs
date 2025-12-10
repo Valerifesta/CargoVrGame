@@ -34,6 +34,9 @@ public class BoatBehaviour : MonoBehaviour
     [SerializeField] private string CurrentChunkName;
     [SerializeField] private int CurrentChunkTopIndex;
     [SerializeField] private int CurrentChunkVerticalIndex;
+
+    [SerializeField] private Vector2[] NeighboringChunks;
+
     [Header("Start paramteters")]
     public int startTopIndex;
     public int startVerticalIndex;
@@ -82,16 +85,43 @@ public class BoatBehaviour : MonoBehaviour
                 CurrentChunkTopIndex = (int)currentChunkIndexes.x;
                 CurrentChunkVerticalIndex = (int)currentChunkIndexes.y;
 
-                worldMan.GetNeighborChunks(CurrentChunkTopIndex, CurrentChunkVerticalIndex);
+                NeighboringChunks = worldMan.GetNeighborChunks(CurrentChunkTopIndex, CurrentChunkVerticalIndex);
 
             }
         }
     }
-    
-    void GetCurrentChunk()//Checks neighbor chunk corners and compares it with current world position
+
+    void TryUpdateCurrentChunk()//Checks neighbor chunk corners and compares it with current world position
     {
-        
+        for (int i = 0; i < NeighboringChunks.Length; i++) //Checks if player is within one of the regristered neighbor chunks.
+        {
+            Vector2 neighbor = NeighboringChunks[i];
+            int neighborIndexInAllChunks = worldMan.listIndexesToAllChunkIndex((int)neighbor.x, (int)neighbor.y);
+            Vector2[] neighborChunkCorners = worldMan.ChunkCorners[neighborIndexInAllChunks];
+            Vector2 neighborLocalCornerA = neighborChunkCorners[0];
+            Vector2 neighborLocalCornerD = neighborChunkCorners[3];
+            if (neighborLocalCornerA.x < FlooredPos.x && FlooredPos.x < neighborLocalCornerD.x && neighborLocalCornerA.y < FlooredPos.y && FlooredPos.y < neighborLocalCornerD.y)
+            {
+                print("BOAT HAS ENTERED A NEIGHBORING CHUNK. INDEX: " + neighbor);
+
+                CurrentChunkName = worldMan.Chunks[neighborIndexInAllChunks].name;
+                CurrentChunkTopIndex = (int)neighbor.x;
+                CurrentChunkVerticalIndex = (int)neighbor.y;
+
+                NeighboringChunks = worldMan.GetNeighborChunks(CurrentChunkTopIndex, CurrentChunkVerticalIndex);
+                
+                //SetCurrentChunk((int)neighbor.x, (int)neighbor.y);
+
+            }
+
+        }
+        //get new neighboring chunks if current chunk chances
     }
+    /*
+    void SetCurrentChunk(int topIndex, int vertIndex)
+    {
+        CurrentChunkName = 
+    }*/
 
     void updateFlooredPos()
     {
@@ -123,11 +153,16 @@ public class BoatBehaviour : MonoBehaviour
     public void Update()
     {
         //if (Input.GetKeyDown(KeyCode.E)) //Syncs states for toggling control of the ship. temporary meassure, to be replaced by automatic syncing in the future..
-                                         //TODO: Make syncing to be correlated with changing values in the corresponding components.
+        //TODO: Make syncing to be correlated with changing values in the corresponding components.
         {
             BoatComponent[] equippedCompsToSync = new BoatComponent[] { EquippedSeat, EquippedMotor, EquippedSteering };
             ChangeBoatCompState(equippedCompsToSync);
             updateFlooredPos();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            TryUpdateCurrentChunk();
         }
     }
 
