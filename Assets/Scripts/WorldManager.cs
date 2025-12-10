@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
 using Oculus.Interaction;
 using Oculus.Interaction.Samples;
 using Oculus.VoiceSDK.UX;
 using OVR.OpenVR;
+using System;
 using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
@@ -158,6 +160,7 @@ public class WorldManager : MonoBehaviour
         }
 
 
+
         /*
      if (verticalIndex != 0)
      {
@@ -178,6 +181,38 @@ public class WorldManager : MonoBehaviour
      }*/
         return null;
     }
+    public void GetNeighborChunks(int currentTopIndex, int currentVertIndex) //Based on current chunk, rooted on start chunk
+    {
+        Vector2 indexes_U = new Vector2(currentTopIndex + 1, currentVertIndex); //Up
+        Vector2 indexes_D = new Vector2(currentTopIndex - 1, currentVertIndex); //Down
+        Vector2 indexes_L = new Vector2(currentTopIndex, currentVertIndex - 1); //Left
+        Vector2 indexes_R = new Vector2(currentTopIndex, currentVertIndex + 1); //Right
+
+        Vector2[] chunkIndexesToCheck = new Vector2[] { indexes_U, indexes_D, indexes_L, indexes_R };
+        for (int i = 0; i < chunkIndexesToCheck.Length; i++)
+        {
+            Vector2 chunk = chunkIndexesToCheck[i];
+            if (chunk.x >= WorldSize || chunk.x < 0 || chunk.y >= WorldSize || chunk.y < 0)
+            {
+                print("ERROR! UNABLE TO RETRIEVE NEIGHBOR CHUNK. OUTSIDE OF RANGE. INPUTTED INDEX: " + chunk);
+            }
+            else
+            {
+                print("RETRIEVED NEIGHBOR CHUNK. INPUTTED INDEX: " + chunk);
+                GameObject retrievedNearbyChunk = GetChunk((int)chunk.x, (int)chunk.y);
+            }
+        }
+        //Check if each is inside of limit. If true, add to neighbor chunks.
+
+
+
+
+    }
+    public int listIndexesToAllChunkIndex(int TopIndex, int VertIndex)
+    {
+        int allChunkIndex = new int();
+        return 0;
+    }
     public Vector2 GetChunkIndexes(int indexInAllChunks)
     {
         int retrievedTopIndex = new int();
@@ -195,16 +230,18 @@ public class WorldManager : MonoBehaviour
                 retrievedTopIndex -= 1; //Makes it into an index instead of a number of steps.
 
             }
-       
+
         }
         else
         {
             retrievedTopIndex = indexInAllChunks;
             retrievedVerticalIndex = 0;
-        }    
+        }
 
         return new Vector2(retrievedTopIndex, retrievedVerticalIndex);
     }
+    
+    
 
     void GenerateChunkCorners(float theoryZ, float theoryX, int indexInAllChunks)
     {
