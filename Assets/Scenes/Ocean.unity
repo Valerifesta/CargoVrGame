@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WorldPivotObj: {fileID: 1841944620}
   ChunkSize: 30
-  WorldSize: 5
+  WorldSize: 20
   Chunks: []
   _verticalChunks: []
   _topChunks: []
@@ -7402,7 +7402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1080232134
 Transform:
   m_ObjectHideFlags: 0

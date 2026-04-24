@@ -160,7 +160,7 @@ public class BoatBehaviour : MonoBehaviour
             updateFlooredPos();
         }
         
-        if (Input.GetKeyDown(KeyCode.U))
+        //if (Input.GetKeyDown(KeyCode.U))
         {
             TryUpdateCurrentChunk();
         }
